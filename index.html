@@ -368,19 +368,7 @@ function drawMonsterSprite(e,now,pulse){
   }
   ctx.restore();
 }
-function drawEnemyTelegraph(e,pulse){
-  if(e.wind<=0||!e.aimPoint)return;
-  ctx.save();ctx.globalAlpha=.58+.35*pulse;ctx.strokeStyle=e.type==='boss'?'#ff514c':'#ff8a65';ctx.lineWidth=e.type==='boss'?4:3;ctx.setLineDash([9,6]);
-  if(e.type==='boss'){
-    let base=Math.atan2(e.aimPoint.y-e.y,e.aimPoint.x-e.x),offsets=e.bossKind==='brood'?Array.from({length:8},(_,i)=>i*Math.PI/4):e.bossKind==='dragon'?[-.30,-.15,0,.15,.30]:[-.50,-.33,-.16,0,.16,.33,.50];
-    if(e.bossKind==='tempest'){for(let i=0;i<10;i++){let a=i*Math.PI/5;ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.x+Math.cos(a)*210,e.y+Math.sin(a)*210);ctx.stroke()}}
-    else if(e.bossKind==='charger'){ctx.beginPath();ctx.arc(e.aimPoint.x,e.aimPoint.y,48+4*pulse,0,Math.PI*2);ctx.stroke()}
-    else for(let off of offsets){let a=base+off;ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.x+Math.cos(a)*260,e.y+Math.sin(a)*260);ctx.stroke()}
-  }else if(e.type==='brute'){
-    ctx.save();ctx.globalAlpha=.20;ctx.lineWidth=18;ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.aimPoint.x,e.aimPoint.y);ctx.stroke();ctx.restore();ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.aimPoint.x,e.aimPoint.y);ctx.stroke()
-  }else{ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.aimPoint.x,e.aimPoint.y);ctx.stroke()}
-  ctx.setLineDash([]);ctx.beginPath();ctx.arc(e.aimPoint.x,e.aimPoint.y,13+3*pulse,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#f15e5577';ctx.beginPath();ctx.arc(e.aimPoint.x,e.aimPoint.y,4,0,Math.PI*2);ctx.fill();ctx.restore();
-}
+function drawEnemyTelegraph(e,pulse){return}
 function draw(){
 if(!player){requestAnimationFrame(draw);return}
 const now=elapsed, pulse=.5+.5*Math.sin(now*3), tile=48;
